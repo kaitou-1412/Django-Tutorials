@@ -2,19 +2,19 @@ from rest_framework import serializers
 from watchlist_app.models import WatchList, StreamPlatform
 
 
-class WatchListSerializer(serializers.ModelSerializer):
+class WatchListSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = WatchList
         fields = "__all__"
 
 
-class StreamPlatformSerializer(serializers.ModelSerializer):
+class StreamPlatformSerializer(serializers.HyperlinkedModelSerializer):
     # watchlist = WatchListSerializer(many=True, read_only=True)
     watchlist = serializers.HyperlinkedRelatedField(
         many=True,
         read_only=True,
-        view_name='watch-detail'
+        view_name='watchlist-detail'
     )
 
     class Meta:

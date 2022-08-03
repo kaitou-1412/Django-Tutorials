@@ -57,7 +57,7 @@ class WatchListAV(APIView):
 
     def get(self, request):
         movies = WatchList.objects.all()
-        serializer = WatchListSerializer(movies, many=True)
+        serializer = WatchListSerializer(movies, many=True, context={'request': request})
         return Response(serializer.data)
 
     def post(self, request):
@@ -76,7 +76,7 @@ class WatchDetailAV(APIView):
             movie = WatchList.objects.get(pk=pk)
         except WatchList.DoesNotExist:
             return Response({'error': 'Not Found'}, status=status.HTTP_404_NOT_FOUND)
-        serializer = WatchListSerializer(movie)
+        serializer = WatchListSerializer(movie, context={'request': request})
         return Response(serializer.data)
 
     def put(self, request, pk):
