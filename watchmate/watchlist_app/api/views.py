@@ -53,7 +53,7 @@ class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
 #         return self.destroy(request, *args, **kwargs)
 
 
-class StreamPlatformVS(viewsets.ModelViewSet):
+class StreamPlatformVS(viewsets.ReadOnlyModelViewSet):
     queryset = StreamPlatform.objects.all()
     serializer_class = StreamPlatformSerializer
 
